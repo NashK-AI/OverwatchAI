@@ -24,9 +24,7 @@ jobs:
 
     - name: Copy files via SCP
       run: |
-        pwd
-        touch a
-      #scp -r ./app.py ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:/.
+        scp -r ./app.py ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:/.
 
     #- name: Execute remote command via SSH
       #run: |
