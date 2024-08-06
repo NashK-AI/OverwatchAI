@@ -24,7 +24,7 @@ jobs:
 
     - name: Copy files via SCP
       run: |
-        scp -r ./app.py github@91.108.112.236$:/.
+        scp -r ./app.py github@91.108.112.236:/.
 
     #- name: Execute remote command via SSH
       #run: |
