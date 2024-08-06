@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description"
+    content="Use our tool based on Artificial intelligence to help choose the best hero for your team and against the enemy team.">
+  <title>Heroes Team Builder AI Overwatch 2 - Use AI to pick your hero</title>
+
+  <link rel="icon" href="{{ url_for('static', filename='Icon.png') }}" type="image/png">
+  <link rel="canonical" href="https://heroesteambuilder.com">
+  <meta property="og:title" content="Overwatch Team Builder - Use AI to pick your hero">
+  <meta property="og:description"
+    content="Use our tool based on Artificial intelligence to help choose the best hero for your team and against the enemy team.">
+  <meta property="og:url" content="https://heroesteambuilder.com">
+  <meta property="og:image" content="https://heroesteambuilder.com/static/AI-tool-Twitt.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Overwatch Team Builder - Use AI to pick your hero">
+  <meta name="twitter:image" content="https://heroesteambuilder.com/static/AI-tool-Twitt.png">
+  <meta name="twitter:description"
+    content="Use our tool based on Artificial intelligence to help choose the best champion for your team and against the enemy team.">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script src="{{ url_for('static', filename='Script.js') }}" defer defer></script>
+  <script type="text/javascript">
+    const baseUrl = "{{ url_for('static', filename='Heroes') }}";
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2976654033364296"
+    crossorigin="anonymous"></script>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WCLZQMVXM7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-WCLZQMVXM7');
+</script>
+
+<body>
+  <div class="menu">
+    <button class="menu-button" id="menuButton">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
+    <ul class="menu-list" id="menuList">
+      <li><a href="#source" id="openModal">AI Data</a></li>
+    </ul>
+  </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <iframe src="source.html" style="width: 100%; height: 96%;"></iframe>
+    </div>
+  </div>
+
+  <div class="blocks-container-title">
+    <img src="{{ url_for('static', filename='title.png') }}" class="image-desktop" alt="Welcome to Overwatch 2 AI tool">
+  </div>
+  <div class="all-containers">
+    <h2>Select enemy and ally heroes and let the Artificial Intelligent guide you</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="blocks-container-team1">
+            <div class="block" id="tank1"></div>
+            <div class="block" id="dps1"></div>
+            <div class="block" id="dps2"></div>
+            <div class="block" id="supp1"></div>
+            <div class="block" id="supp2"></div>
+          </div>
+          <div class="blocks-totals">
+            <span class="totals">Totals scores: <span class="ScoresTeams"></span></span>
+            <span class="totals-opp">Oppenent scores: <span class="ScoresTeamsOpp"></span></span>
+            <span class="totals-synergy">Synergy scores: <span class="ScoresTeamsSynergy"></span></span>
+          </div>
+        </div>
+        <div class="vs"></div>
+        <div class="col">
+          <div class="blocks-container-team2">
+            <div class="block" id="tank2"></div>
+            <div class="block" id="dps3"></div>
+            <div class="block" id="dps4"></div>
+            <div class="block" id="supp3"></div>
+            <div class="block" id="supp4"></div>
+          </div>
+
+        </div>
+      </div>
+      <button class="reset-button" onclick="resetImages()">Reset</button>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <div class="tvse">
+        <span class="ally versus">Your Team</span>
+        <span class="v versus">V</span>
+        <span class="s versus">S</span>
+        <span class="enemy versus">Enemy Team</span>
+      </div>
+
+
+      <div class="row-heroes">
+        <div class="col-heroes" data-block="1">
+          <div class="blocks-container-heroes">
+
+            <div class="category-container  tanks">
+              {% for image in imagestank %}
+              <div class="fixed-image" id="tanks" data-image="{{ image }}">
+                <img src="{{ url_for('static', filename='Heroes/tanks/' + image + '.png') }}" alt='{{ image }}'
+                  class="hero-image">
+                <p class="image-text">{{ image }}</p>
+              </div>
+              {% endfor %}
+              <img src="{{ url_for('static', filename='Heroes/Icones/tanksIcone.png') }}" alt="Icone"
+                class="centered-image">
+            </div>
+
+
+            <div class="category-container dps">
+              {% for image in imagesdps %}
+              <div class="fixed-image" id="dps" data-image="{{ image }}">
+                <img src="{{ url_for('static', filename='Heroes/dps/' + image + '.png') }}" alt='{{ image }}'
+                  class="hero-image">
+                <p class="image-text">{{ image }}</p>
+              </div>
+              {% endfor %}
+              <img src="{{ url_for('static', filename='Heroes/Icones/dpsIcone.png') }}" alt="Icone"
+                class="centered-image">
+            </div>
+
+
+            <div class="category-container healers">
+              {% for image in imagessupport %}
+              <div class="fixed-image" id="healers" data-image="{{ image }}">
+                <img src="{{ url_for('static', filename='Heroes/healers/' + image + '.png') }}" alt='{{ image }}'
+                  class="hero-image">
+                <p class="image-text">{{ image }}</p>
+              </div>
+              {% endfor %}
+              <img src="{{ url_for('static', filename='Heroes/Icones/healersIcone.png') }}" alt="Icone"
+                class="centered-image">
+            </div>
+
+          </div>
+        </div>
+        <div style="margin-top: 10px;"></div>
+        <div class="col-heroes" data-block="2">
+          <div class="blocks-container-heroes">
+
+            <div class="category-container">
+              {% for image in imagestank %}
+              <div class="fixed-image" id="tanks2" data-image="{{ image }}">
+                <img src="{{ url_for('static', filename='Heroes/tanks/' + image + '.png') }}" alt='{{ image }}'>
+                <p class="image-text">{{ image }}</p>
+              </div>
+              {% endfor %}
+              <img src="{{ url_for('static', filename='Heroes/Icones/tanksIcone.png') }}" alt="Icone"
+                class="centered-image-opp">
+            </div>
+
+
+            <div class="category-container">
+              {% for image in imagesdps %}
+              <div class="fixed-image" id="dps2" data-image="{{ image }}">
+                <img src="{{ url_for('static', filename='Heroes/dps/' + image + '.png') }}" alt='{{ image }}'>
+                <p class="image-text">{{ image }}</p>
+              </div>
+              {% endfor %}
+              <img src="{{ url_for('static', filename='Heroes/Icones/dpsIcone.png') }}" alt="Icone"
+                class="centered-image-opp">
+            </div>
+
+
+            <div class="category-container">
+              {% for image in imagessupport %}
+              <div class="fixed-image" id="healers2" data-image="{{ image }}">
+                <img src="{{ url_for('static', filename='Heroes/healers/' + image + '.png') }}" alt='{{ image }}'>
+                <p class="image-text">{{ image }}</p>
+              </div>
+              {% endfor %}
+              <img src="{{ url_for('static', filename='Heroes/Icones/healersIcone.png') }}" alt="Icone"
+                class="centered-image-opp">
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="blocks-container-menu">
+        <div class="menu-container">
+          <div class="checkbox-container">
+            <input type="checkbox" id="cbxGreen" class="cbxGreen hidden" />
+            <div class="scores-filter"><span>Sort by Green Scores</span></div>
+            <label for="cbxGreen" class="lbl"></label>
+          </div>
+          <div class="checkbox-container">
+            <input type="checkbox" id="cbxBlue" class="cbxBlue hidden" />
+            <div class="scores-filter"><span>Sort by Blue Scores</span></div>
+            <label for="cbxBlue" class="lbl"></label>
+          </div>
+
+          <div class="checkbox-container">
+            <input type="checkbox" id="cbx" class="cbx hidden" />
+            <div class="scores-filter"><span>Merge Scores</span></div>
+            <label for="cbx" class="lbl"></label>
+          </div>
+        </div>
+        <div class="menu-container-legend">
+          <fieldset>
+            <label id="effi-opponents" class="green-score">Green Scores :</label><span> Efficiency score against
+              enemies</span><br><br>
+            <label id="effi-allies" class="blue-score">Blue Scores :</label><span> Efficiency score with your
+              team</span><br><br>
+            <label id="merge-score" class="merge-score">Merge Scores :</label><span> Merge scores Enemies &
+              Allies</span>
+          </fieldset>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class='footer-container'>
+      <a href="https://www.twitch.tv/nashk4i" class="footer__link" target="_blank">
+        <img src="/static/twitch.png" alt="twitch Icon" width="20" height="20"><span class="TwitchLink"
+          alt="Twitch NashKAI / NashK4I">Twitch</span>
+      </a>
+
+      <a href="https://discord.com/invite/QsQsWYc2PQ" class="footer__link" target="_blank">
+        <img src="/static/discord.png" alt="Discord Icon" width="20" height="20"><span class="DiscordLink"
+          alt="Discord NashKAI / NashK4I">Discord</span>
+      </a>
+      <a href="https://x.com/NashK_AI" class="footer__link" target="_blank">
+        <img src="/static/twitter.png" alt="twitter Icon" width="20" height="20"><span class="TwitterLink"
+          alt="twitter NashKAI / NashK4I">X</span>
+      </a>
+      <div class="separador"></div>
+      Copyright &copy; 2024 | Made by NashKAI
+      <div class="version">Version: 0.8.5</div>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
