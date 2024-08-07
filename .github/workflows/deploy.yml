@@ -17,6 +17,8 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      env:
+        GIT_SSH_COMMAND: "ssh -o LogLevel=ERROR"
         
     - name: Add server to known_hosts
       run: |
