@@ -13,4 +13,5 @@ jobs:
         username: ${{ secrets.SECRET_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
-        script: ls
+        source: "a.txt"
+        target: "."
