@@ -36,7 +36,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: 22
         source: "a.txt"
-        target: ${{ secrets.SECRET_SERVER }}
+        target: "."
 
     #- name: Execute remote command via SSH
       #run: |
