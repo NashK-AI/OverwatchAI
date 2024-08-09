@@ -26,7 +26,7 @@ jobs:
 
     - name: Copy files via SCP
       run: |
-        scp -q ./a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
+        scp -q a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
 
     #- name: Execute remote command via SSH
       #run: |
