@@ -9,8 +9,8 @@ jobs:
     - name: Mise Ã jour des dispos Jaminco
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.VM_IPADDRESS }}
-        username: ${{ secrets.SSH_USER }}
+        host: ${{ secrets.SECRET_SERVER }}
+        username: ${{ secrets.SECRET_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: ls
