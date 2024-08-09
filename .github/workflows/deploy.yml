@@ -1,33 +1,16 @@
-name: Deploy to Server
-
-on:
-  push:
-    branches:
-      - dev  # Déclenche le workflow sur les push vers la branche principale
-
+name: remote ssh command
+on: [push]
 jobs:
-  deploy:
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.3
+    - name: Mise Ã jour des dispos Jaminco
+      uses: appleboy/ssh-action@master
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      env:
-        GIT_SSH_COMMAND: "ssh -o LogLevel=ERROR"
-        
-    - name: Add server to known_hosts
-      run: |
-        ssh-keyscan -H ${{ secrets.SECRET_SERVER }} >> ~/.ssh/known_hosts
-
-    - name: Copy files via SCP
-      run: |
-        scp -o StrictHostKeyChecking=no -vvv a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
-
-    #- name: Execute remote command via SSH
-      #run: |
-       # ssh user@your-server 'cd /path/on/server && ./deploy-script.sh'
+        host: ${{ secrets.VM_IPADDRESS }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: ls
