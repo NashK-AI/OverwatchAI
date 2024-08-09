@@ -33,7 +33,7 @@ jobs:
       with:
         host: ${{ secrets.SECRET_SERVER }}
         username: ${{ secrets.SECRET_USER }}
-        password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         source: "a.txt"
         target: "."
