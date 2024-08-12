@@ -1,18 +1,29 @@
-name: scp files
-on: [push]
-jobs:
+name: Deploy to Server
 
-  build:
-    name: Build
+on:
+  push:
+    branches:
+      - dev  # Déclenche le workflow sur les push vers la branche principale
+
+jobs:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@v0.1.7
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.5.3
       with:
-        host: ${{ secrets.SECRET_SERVER }}
-        username: ${{ secrets.SECRET_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        source: "a.txt"
-        target: "a.txt"
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      env:
+        GIT_SSH_COMMAND: "ssh -o LogLevel=ERROR"
+        
+    - name: Add server to known_hosts
+      run: |
+        ssh-keyscan -H ${{ secrets.SECRET_SERVER }} >> ~/.ssh/known_hosts
+
+    - name: Copy files via SCP
+      run: |
+        scp -o StrictHostKeyChecking=no -vvv a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
