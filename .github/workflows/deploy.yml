@@ -25,13 +25,15 @@ jobs:
     - name: Deploy code via SSH
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }} "
-        REPO_DIR='';
+        REPO_DIR='OverwatchAI';
         REPO_URL='git@github.com:NashK-AI/OverwatchAI.git';
+        BRANCH='dev';
         if [ -d \"\$REPO_DIR/.git\" ]; then
           cd \$REPO_DIR;
-          git pull;
+          git checkout \$BRANCH;
+          git pull origin \$BRANCH;
         else
-          git clone \$REPO_URL \$REPO_DIR;
+          git clone -b \$BRANCH \$REPO_URL \$REPO_DIR;
         fi"
 
 
