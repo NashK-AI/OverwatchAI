@@ -14,7 +14,7 @@ jobs:
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.PRIVATE }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       env:
         GIT_SSH_COMMAND: "ssh -o LogLevel=ERROR"
         
@@ -24,18 +24,18 @@ jobs:
 
     - name: Test SSH connection and permissions
       run: |
-        ssh -o StrictHostKeyChecking=no nash@${{ secrets.SECRET_SERVER }} "touch z && touch app/z"
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }} "touch z && touch app/z"
 
           
     - name: Copy files via SCP
       run: |
-        scp -vvv -o StrictHostKeyChecking=no a.txt nash@${{ secrets.SECRET_SERVER }}:app/.
+        scp -vvv -o StrictHostKeyChecking=no a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
         
     - name: try ll
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SECRET_SERVER }}
-        username: nash
-        key: ${{ secrets.PRIVATE }}
+        username: ${{ secrets.SECRET_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
-        script: ls      
+        script: ls
