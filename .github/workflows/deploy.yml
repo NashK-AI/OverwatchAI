@@ -28,7 +28,7 @@ jobs:
 
     - name: Copy files via SCP
       run: |
-        scp -o StrictHostKeyChecking=no -vvv a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
+        scp -vvv -o StrictHostKeyChecking=no a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:~/
         
     - name: try ll
       uses: appleboy/ssh-action@master
