@@ -26,16 +26,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }} "touch z && touch app/z"
 
-    - name: copy file via scp password
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: ${{ secrets.SECRET_SERVER }}
-        username: ${{ secrets.SECRET_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        source: "a.txt"
-        target: "a.txt"
-        
+          
     - name: Copy files via SCP
       run: |
         scp -vvv -o StrictHostKeyChecking=no a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
