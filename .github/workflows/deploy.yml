@@ -35,6 +35,7 @@ jobs:
         else
           git clone -b \$BRANCH \$REPO_URL \$REPO_DIR;
         fi
+        pwd
         cp -fr OverwatchAI/* app/."
 
 
