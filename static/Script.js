@@ -147,9 +147,9 @@ function scoreToColor(score) {
 
 
 function resetChampions() {
-    $.ajax({
+    $.ajax({        
         type: "POST",
-        url: "/reset_champions",  // Endpoint Flask où envoyer les données
+        url: `reset_champions`,  // Endpoint Flask où envoyer les données
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-CSRFToken', $('meta[name="csrf-token"]').attr('content'));
         },
@@ -179,7 +179,7 @@ function sendChampionRequest(championName) {
     // Ici, on envoie la requête au serveur
     $.ajax({
         type: "POST",
-        url: "/ally_champion",
+        url: "ally_champion",
         data: { ally_champion: championName },
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-CSRFToken', $('meta[name="csrf-token"]').attr('content'));
@@ -236,7 +236,7 @@ function sendChampionRequestOpponent(championName) {
 
     $.ajax({
         type: "POST",
-        url: "/opponent_champion",  // Endpoint Flask où envoyer les données
+        url: `opponent_champion`,  // Endpoint Flask où envoyer les données
         data: { opponent_champion: championName },  // Données à envoyer
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-CSRFToken', $('meta[name="csrf-token"]').attr('content'));
@@ -273,7 +273,7 @@ function processRemoveQueue() {
 
         $.ajax({
             type: "POST",
-            url: "/remove_ally_champion",
+            url: "remove_ally_champion",
             data: { ally_champion: championNameToRemove },
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRFToken', $('meta[name="csrf-token"]').attr('content'));
@@ -314,7 +314,7 @@ function processRemoveQueueOpponent() {
 
         $.ajax({
             type: "POST",
-            url: "/remove_opponent_champion",
+            url: "remove_opponent_champion",
             data: { opponent_champion: championNameToRemove },
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRFToken', $('meta[name="csrf-token"]').attr('content'));
@@ -405,7 +405,7 @@ function updateHeroContainers(data) {
             container.appendChild(heroDiv);
         });
         const img = document.createElement('img');
-        img.src = `${baseUrl}/Icones/` + category + "Icone.png";
+        img.src = `${window.baseUrl}/Icones/` + category + "Icone.png";
         img.alt = category;
         img.className = "centered-image";
         container.appendChild(img);
@@ -450,7 +450,7 @@ function createHeroDiv(heroName, category, valueScoreOpponent, valueScoreAlly, S
 
     // Créer l'élément img pour l'image du héros
     const img = document.createElement('img');
-    img.src = `${baseUrl}/` + category + '/' + heroName + '.png';
+    img.src = `${window.baseUrl}/` + category + '/' + heroName + '.png';
     img.alt = heroName;
 
     const score = document.createElement('div');
@@ -497,7 +497,7 @@ function updateEchoRecommendation() {
 
 
     // Construire le chemin de l'image basé sur le champion recommandé
-    const imagePath = `${baseUrl}/${championType}/${recommendedChampion}.png`;
+    const imagePath = `${window.baseUrl}/${championType}/${recommendedChampion}.png`;
 
     // Sélectionner l'élément où vous voulez afficher l'image (ajustez selon votre HTML)
     const echoImageContainer = document.querySelector(".col-heroes[data-block='1'] [data-image='Echo']");

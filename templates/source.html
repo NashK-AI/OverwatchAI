@@ -1,39 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/styleSource.css">
+
+
+    {% if stage %}
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='styleSource.css', _external=True, _scheme='https') | replace('https://heroesteambuilder.com', 'https://heroesteambuilder.com/dev') }}">
+    {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleSource.css') }}">
+    {% endif %}
+
     <!-- 
     <link rel="stylesheet" href="{{ url_for('static', filename= 'styleSource.css') }}"> 
      -->
     <title>Source</title>
 </head>
+
 <body>
 
     <main>
         <section id="introduction">
             <h2>Introduction</h2>
-            <p>Heroes Team Builder is an innovative artificial intelligence (AI) tool designed to suggest the most suitable champions based on the opposing team and the allied team.</p>
-            <p>Unlike other similar tools that rely on traditional algorithms, Heroes Team Builder harnesses the power of artificial intelligence to offer more precise and tailored suggestions. Here are the main advantages of this approach:</p>
-            <p>Continuous Learning: The AI can continuously learn and adapt to new data and changes in the game, ensuring that the suggestions remain always relevant and up-to-date. Unlike static algorithms, the AI evolves over time.</p>
-            <p>Contextual Analysis: The AI is capable of understanding the complex context between heroes by analyzing multiple variables simultaneously, such as champion abilities, hero interactions, and team strategies. This allows for more refined and nuanced recommendations.</p>
-            <p>Accurate Predictions: By analyzing vast amounts of data, the AI can predict with great accuracy which champions will be most effective in a given situation, taking into account thousands of possible combinations.</p>
+            <p>Heroes Team Builder is an innovative artificial intelligence (AI) tool designed to suggest the most
+                suitable champions based on the opposing team and the allied team.</p>
+            <p>Unlike other similar tools that rely on traditional algorithms, Heroes Team Builder harnesses the power
+                of artificial intelligence to offer more precise and tailored suggestions. Here are the main advantages
+                of this approach:</p>
+            <p>Continuous Learning: The AI can continuously learn and adapt to new data and changes in the game,
+                ensuring that the suggestions remain always relevant and up-to-date. Unlike static algorithms, the AI
+                evolves over time.</p>
+            <p>Contextual Analysis: The AI is capable of understanding the complex context between heroes by analyzing
+                multiple variables simultaneously, such as champion abilities, hero interactions, and team strategies.
+                This allows for more refined and nuanced recommendations.</p>
+            <p>Accurate Predictions: By analyzing vast amounts of data, the AI can predict with great accuracy which
+                champions will be most effective in a given situation, taking into account thousands of possible
+                combinations.</p>
         </section>
 
         <section id="how-it-works">
             <h2>What kind of data is?</h2>
-            <p>The artificial intelligence (AI) analyze the data provided by the game, patchs and suggest optimal champions. The AI relies on structured and factual data, trained from real in-game situations.</p>
-            <p>Each hero has measurable effectiveness against or with every other hero, based on concrete facts and real situations.</p>
-            <p>Example:</p> 
-            <p>Genji can deflect Cassidy's grenades, shots, and ultimate, making him a potential strategic choice against him.</p>
+            <p>The artificial intelligence (AI) analyze the data provided by the game, patchs and suggest optimal
+                champions. The AI relies on structured and factual data, trained from real in-game situations.</p>
+            <p>Each hero has measurable effectiveness against or with every other hero, based on concrete facts and real
+                situations.</p>
+            <p>Example:</p>
+            <p>Genji can deflect Cassidy's grenades, shots, and ultimate, making him a potential strategic choice
+                against him.</p>
             <p>or Zarya's shield to protect Phara when she uses her ultimate</p>
 
         </section>
 
         <section id="data-structure">
             <h2>Data Structure</h2>
-            
+
             <h3>1. Efficiency Against the Opposing Team</h3>
             <p>Types of Data Analyzed:</p>
             <ul>
@@ -41,7 +63,8 @@
                 <li>Ultimates and their effects on opposing heroes</li>
                 <li>Efficiency in close combat (melee) or at range</li>
                 <li>Mobility and movement capabilities of heroes</li>
-                <li>Influence of abilities on healing or opponent characteristics (e.g., defense reduction by Zenyatta)</li>
+                <li>Influence of abilities on healing or opponent characteristics (e.g., defense reduction by Zenyatta)
+                </li>
             </ul>
 
             <h3>2. Synergy with the Allied Team</h3>
@@ -49,19 +72,26 @@
             <p>Types of Data Analyzed:</p>
             <ul>
                 <li>How a hero's abilities and ultimates complement those of allies</li>
-                <li>Positive interactions between allies' abilities (e.g., combining a crowd control ability with a high damage area attack)</li>
+                <li>Positive interactions between allies' abilities (e.g., combining a crowd control ability with a high
+                    damage area attack)</li>
                 <li>Mutual support in terms of healing, protection, and damage amplification</li>
-                <li>Team Composition: analysis of play styles such as dive, brawl, or poke, and their suitability with the chosen champions.</li>
-                <li>Efficiency of champions in terms of healing or shields: determining the relevance of heroes based on their ability to provide heals or shields, suited for close combat (melee) or at range.</li>
+                <li>Team Composition: analysis of play styles such as dive, brawl, or poke, and their suitability with
+                    the chosen champions.</li>
+                <li>Efficiency of champions in terms of healing or shields: determining the relevance of heroes based on
+                    their ability to provide heals or shields, suited for close combat (melee) or at range.</li>
             </ul>
         </section>
 
         <section id="conclusion">
             <h2>Conclusion</h2>
-            <p>Heroes Team Builder relies on in-depth analysis of real and concrete data to provide precise and effective suggestions. By combining detailed information on abilities, ultimates, and hero characteristics, the tool helps players optimize their game strategy and form cohesive and powerful teams.</p>
+            <p>Heroes Team Builder relies on in-depth analysis of real and concrete data to provide precise and
+                effective suggestions. By combining detailed information on abilities, ultimates, and hero
+                characteristics, the tool helps players optimize their game strategy and form cohesive and powerful
+                teams.</p>
         </section>
     </main>
 
-    
+
 </body>
+
 </html>
