@@ -34,9 +34,16 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: ls
+
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+      shell: bash
           
     - name: Copy files via SCP
       run: |
-        scp -i ${{ secrets.SSH_PRIVATE_KEY }} -vvv -o StrictHostKeyChecking=no a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
+        scp -i ~/.ssh/id_rsa -vvv -o StrictHostKeyChecking=no a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
 
         
