@@ -44,6 +44,6 @@ jobs:
           
     - name: Copy files via SCP
       run: |
-        scp -i ~/.ssh/id_rsa -vvv -o StrictHostKeyChecking=no a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
+        scp -i ~/.ssh/id_rsa -v  a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/a.txt
 
         
