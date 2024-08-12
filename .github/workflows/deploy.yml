@@ -3,38 +3,35 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - dev  # Déclenche le workflow sur les push vers la branche principale
+      - dev
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      env:
-        GIT_SSH_COMMAND: "ssh -o LogLevel=ERROR"
-        
+
     - name: Add server to known_hosts
       run: |
         ssh-keyscan -H ${{ secrets.SECRET_SERVER }} >> ~/.ssh/known_hosts
 
-    - name: Test SSH connection and permissions
+    - name: Deploy code via SSH
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }} "touch z && touch app/z"
-        
-    - name: try ll
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SECRET_SERVER }}
-        username: ${{ secrets.SECRET_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        script: ls
-          
-    - name: Copy files via SCP
-      run: |
-        scp -vvv -o StrictHostKeyChecking=no a.txt ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }}:app/.
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SECRET_USER }}@${{ secrets.SECRET_SERVER }} "
+        REPO_DIR='app';
+        REPO_URL='git@github.com:NashK-AI/OverwatchAI.git';
+        if [ -d \"\$REPO_DIR/.git\" ]; then
+          cd \$REPO_DIR;
+          git pull;
+        else
+          git clone \$REPO_URL \$REPO_DIR;
+        fi"
+
+
