@@ -20,7 +20,7 @@ app.secret_key = os.getenv('SECRET_KEY')
 
 app.logger.setLevel(logging.DEBUG)
 
-ENV = os.getenv('FLASK_ENV', 'a')
+ENV = os.getenv('FLASK_ENV', 'dev')
 @app.context_processor
 def inject_stage():
     if ENV == 'dev':
