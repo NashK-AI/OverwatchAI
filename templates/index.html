@@ -25,16 +25,18 @@
   {% if stage %}
   <link rel="stylesheet"
     href="{{ url_for('static', filename='style.css', _external=True, _scheme='https') | replace('https://heroesteambuilder.com', 'https://heroesteambuilder.com/dev') }}">
-  <script src= "{{ url_for('static', filename='Script.js', _external=True, _scheme='https') | replace('https://heroesteambuilder.com', 'https://heroesteambuilder.com/dev') }}" defer></script>
+  <script
+    src="{{ url_for('static', filename='Script.js', _external=True, _scheme='https') | replace('https://heroesteambuilder.com', 'https://heroesteambuilder.com/dev') }}"
+    defer></script>
   <script>
-      window.baseUrl = "{{ url_for('static', filename='Heroes', _external=True, _scheme='https') | replace('https://heroesteambuilder.com', 'https://heroesteambuilder.com/dev') }}";
+    window.baseUrl = "{{ url_for('static', filename='Heroes', _external=True, _scheme='https') | replace('https://heroesteambuilder.com', 'https://heroesteambuilder.com/dev') }}";
   </script>
   {% else %}
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="{{ url_for('static', filename='Script.js') }}" defer></script>
   <script>
     window.baseUrl = "{{ url_for('static', filename='Heroes') }}";
-  </script>  
+  </script>
   {% endif %}
 
 
@@ -76,7 +78,7 @@
 
   <div class="blocks-container-title">
     <img src="{{ base_url ~ 'title.png' }}" class="image-desktop" alt="Welcome to Overwatch 2 AI tool">
-    
+
   </div>
   <div class="all-containers">
     <h2>Select enemy and ally heroes and let the Artificial Intelligent guide you</h2>
@@ -90,11 +92,7 @@
             <div class="block" id="supp1"></div>
             <div class="block" id="supp2"></div>
           </div>
-          <div class="blocks-totals">
-            <span class="totals">Totals scores: <span class="ScoresTeams"></span></span>
-            <span class="totals-opp">Oppenent scores: <span class="ScoresTeamsOpp"></span></span>
-            <span class="totals-synergy">Synergy scores: <span class="ScoresTeamsSynergy"></span></span>
-          </div>
+
         </div>
         <div class="vs"></div>
         <div class="col">
@@ -106,6 +104,14 @@
             <div class="block" id="supp4"></div>
           </div>
 
+        </div>
+
+      </div>
+      <div class="blocks-totals-hide">
+        <div class="blocks-totals">
+          <span class="totals">Totals scores: <span class="ScoresTeams"></span></span>
+          <span class="totals-opp">Oppenent scores: <span class="ScoresTeamsOpp"></span></span>
+          <span class="totals-synergy">Synergy scores: <span class="ScoresTeamsSynergy"></span></span>
         </div>
       </div>
       <button class="reset-button" onclick="resetImages()">Reset</button>
