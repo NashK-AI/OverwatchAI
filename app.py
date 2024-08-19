@@ -6,14 +6,27 @@ import pandas as pd
 import numpy as np
 from flask_wtf import CSRFProtect
 from dotenv import load_dotenv
+import logging
 import sys
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 # Clé secrète nécessaire pour la session et la protection CSRF
 app.config['SECRET_KEY'] = '\x08J/\x9e\xc6\\\xf4p\n\x17l\xd9\x96\x11\x85\xb8s\xf5\x18#i\xda!w'
 csrf = CSRFProtect(app)
 load_dotenv()
 app.secret_key = os.getenv('SECRET_KEY')
+
+
+app.logger.setLevel(logging.DEBUG)
+
+ENV = os.getenv('FLASK_ENV', 'dev')
+@app.context_processor
+def inject_stage():
+    if ENV == 'dev':
+        return dict(stage='dev')
+    else:
+        return dict(stage='')
 
 
 # Liste des dossiers à parcourir
@@ -257,8 +270,14 @@ def ranked_healers(efficiency_scores):
 def round_predictions(predictions):
     return [(hero, round(efficiency, 2)) for hero, efficiency in predictions]
 
+def route_prefix(path):
+    """Custom route decorator to handle environment-specific prefixes."""
+    if ENV == 'dev':
+        return f"/dev{path}"
+    return path
 
-@app.route('/')
+
+@app.route(route_prefix('/'))
 def index():
     directory = os.path.abspath(os.path.join(
         os.path.dirname(__file__),  './static/Heroes/tanks/'))
@@ -275,7 +294,7 @@ def index():
     return render_template('index.html', imagestank=imagestank, imagessupport=imagessupport, imagesdps=imagesdps)
 
 
-@app.route('/ally_champion', methods=['POST'])
+@app.route(route_prefix('/ally_champion'), methods=['POST'])
 def select_ally_champion():
     if request.method == 'POST':
         champion_name = request.form.get('ally_champion')
@@ -299,7 +318,7 @@ def select_ally_champion():
         return "Wrong HTTP method used for this endpoint"
 
 
-@app.route('/opponent_champion', methods=['POST'])
+@app.route(route_prefix('/opponent_champion'), methods=['POST'])
 def select_adversary_champion():
     if request.method == 'POST':
         champion_name = request.form.get('opponent_champion')
@@ -320,7 +339,7 @@ def select_adversary_champion():
         return "Wrong HTTP method used for this endpoint"
 
 
-@app.route('/remove_ally_champion', methods=['POST'])
+@app.route(route_prefix('/remove_ally_champion'), methods=['POST'])
 def remove_ally_champion():
     if request.method == 'POST':
         champion_name = request.form.get('ally_champion')
@@ -345,7 +364,7 @@ def remove_ally_champion():
         return "Wrong HTTP method used for this endpoint"
 
 
-@app.route('/remove_opponent_champion', methods=['POST'])
+@app.route(route_prefix('/remove_opponent_champion'), methods=['POST'])
 def remove_opponent_champion():
     if request.method == 'POST':
         champion_name = request.form.get('opponent_champion')
@@ -369,7 +388,7 @@ def remove_opponent_champion():
         return "Wrong HTTP method used for this endpoint"
 
 
-@app.route('/reset_champions', methods=['POST'])
+@app.route(route_prefix('/reset_champions'), methods=['POST'])
 def reset_champions():
     if request.method == 'POST':
         session['selected_ally_champions'] = []
@@ -395,9 +414,9 @@ def robots_txt():
 def ads_txt():
     return send_from_directory('static', 'ads.txt')
 
-@app.route('/source.html')
+@app.route(route_prefix('/source.html'))
 def sources():
-    return send_from_directory('templates', 'source.html')
+    return render_template('source.html')
 
 
 @app.route('/sitemap.xml')
@@ -410,5 +429,6 @@ def google_search_console():
     return send_from_directory('static', 'google640d04f74d844b32.html')
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":    
+    logging.debug("Starting the Flask app.")
     app.run(debug=True)
