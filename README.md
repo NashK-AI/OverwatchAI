@@ -3,7 +3,7 @@
 
 ![Heroes team Builder Overwatch AI](https://heroesteambuilder.com/static/title.png)
 
-Heroes Team Builder is an innovative artificial intelligence (AI) tool designed to suggest the most suitable champions based on the opposing team and the allied team.
+[Heroes Team Builder](https://heroesteambuilder.com/) is an innovative artificial intelligence (AI) tool designed to suggest the most suitable champions based on the opposing team and the allied team.
 Unlike other similar tools that rely on traditional algorithms, Heroes Team Builder harnesses the power of artificial intelligence to offer more precise and tailored suggestions.
 
 What kind of data is used?
