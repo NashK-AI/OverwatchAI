@@ -79,6 +79,7 @@ To do so, you will need access to our Discord via this link https://discord.gg/R
 => ***Deploy to the development environment whenever you wish***
 
 CI-CD:
+
     create-branch
     pull-request
     run-deploy
