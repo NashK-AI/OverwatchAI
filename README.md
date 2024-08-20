@@ -1,9 +1,8 @@
-
 #  Heroes Team Builder Overwatch AI
 
 ![Heroes team Builder Overwatch AI](https://heroesteambuilder.com/static/title.png)
 
-Heroes Team Builder is an innovative artificial intelligence (AI) tool designed to suggest the most suitable champions based on the opposing team and the allied team.
+[Heroes Team Builder](https://heroesteambuilder.com/) is an innovative artificial intelligence (AI) tool designed to suggest the most suitable champions based on the opposing team and the allied team.
 Unlike other similar tools that rely on traditional algorithms, Heroes Team Builder harnesses the power of artificial intelligence to offer more precise and tailored suggestions.
 
 What kind of data is used?
@@ -34,7 +33,7 @@ To set up and run this project, follow these steps:
 
 2. **Create a Python virtual environment**
 
-    python -m venv env
+   ``` python -m venv env  ```
 
 3. **Activate the virtual environment:**
     
@@ -48,11 +47,11 @@ or Linux
 
 4. **Install the necessary dependencies**
 
-    pip install -r requirements.txt
+    ``` pip install -r requirements.txt  ```
 
 5. Start the project
 
-    python app.py
+   ``` python app.py  ```
 
 
 
@@ -79,6 +78,7 @@ To do so, you will need access to our Discord via this link https://discord.gg/R
 => ***Deploy to the development environment whenever you wish***
 
 CI-CD:
+
     create-branch
     pull-request
     run-deploy
