@@ -34,7 +34,7 @@ To set up and run this project, follow these steps:
 
 2. **Create a Python virtual environment**
 
-    python -m venv env
+   ``` python -m venv env  ```
 
 3. **Activate the virtual environment:**
     
@@ -48,11 +48,11 @@ or Linux
 
 4. **Install the necessary dependencies**
 
-    pip install -r requirements.txt
+    ``` pip install -r requirements.txt  ```
 
 5. Start the project
 
-    python app.py
+   ``` python app.py  ```
 
 
 
